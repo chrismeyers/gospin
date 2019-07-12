@@ -24,7 +24,7 @@ func spin() {
 		fmt.Printf("%s\r", result.Glyph)
 
 		i++
-		if i == len(seq) {
+		if result.Reset {
 			i = 0
 		}
 
@@ -33,9 +33,6 @@ func spin() {
 }
 
 func main() {
-	// Start API server
-	go run()
-
-	// SPIN FOREVER!
-	spin()
+	go run() // Start API server
+	spin()   // SPIN FOREVER!
 }

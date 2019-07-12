@@ -12,6 +12,7 @@ import (
 // Step - information for the current step
 type Step struct {
 	Glyph string `json:"glyph"`
+	Reset bool   `json:"reset"`
 }
 
 var seq = [...]string{"|", "/", "-", "\\"}
@@ -33,7 +34,7 @@ func handleStep(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		json.NewEncoder(w).Encode(Step{Glyph: seq[num]})
+		json.NewEncoder(w).Encode(Step{Glyph: seq[num], Reset: num == len(seq)-1})
 	} else {
 		http.Error(w, "No step number given", http.StatusBadRequest)
 	}
